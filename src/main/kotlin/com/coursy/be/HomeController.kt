@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1")
 class HomeController {
+
     @GetMapping
-    fun helloWorld(): String {
-        return "Hello world!"
-    }
+    fun helloWorld(): String = "Hello world!"
+
 }
