@@ -1,0 +1,18 @@
+@url = {{host}}/platform
+
+### GET all plaftorms
+
+GET {{url}}
+
+### POST new platform with random name
+
+POST {{url}}
+Content-Type: application/json
+
+{
+  "name": "{{$random.alphabetic(10)}}"
+}
+
+### DELETE platform by id
+
+DELETE {{url}}/1
