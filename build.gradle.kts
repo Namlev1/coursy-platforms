@@ -27,7 +27,17 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     runtimeOnly("org.postgresql:postgresql")
+    implementation("io.arrow-kt:arrow-core:2.0.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("io.mockk:mockk:1.13.17")
+
+    // Kotest
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.0")
+    testImplementation("io.kotest:kotest-assertions-core:5.9.0")
+    testImplementation("io.kotest:kotest-property:5.9.0")
+    testImplementation("io.kotest:kotest-extensions-spring:6.0.0.M3")
+    // For Arrow Either assertions
+    testImplementation("io.kotest.extensions:kotest-assertions-arrow:2.0.0")
 }
 
 kotlin {

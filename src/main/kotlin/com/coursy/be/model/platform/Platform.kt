@@ -1,4 +1,4 @@
-package com.coursy.be.model
+package com.coursy.be.model.platform
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

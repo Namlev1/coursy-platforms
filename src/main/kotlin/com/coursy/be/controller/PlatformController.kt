@@ -1,6 +1,6 @@
 package com.coursy.be.controller
 
-import com.coursy.be.model.Platform
+import com.coursy.be.model.platform.Platform
 import com.coursy.be.service.PlatformService
 import org.springframework.web.bind.annotation.*
 
