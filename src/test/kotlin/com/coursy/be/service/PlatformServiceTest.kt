@@ -2,6 +2,7 @@ package com.coursy.be.service
 
 import com.coursy.be.model.platform.Platform
 import com.coursy.be.model.platform.PlatformFailure
+import com.coursy.be.model.platform.toDto
 import com.coursy.be.repository.PlatformRepository
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.core.spec.style.DescribeSpec
@@ -40,7 +41,7 @@ class PlatformServiceTest : DescribeSpec({
 
                 // then
                 result shouldHaveSize 2
-                result shouldContainExactly listOf(p1, p2)
+                result shouldContainExactly listOf(p1.toDto(), p2.toDto())
             }
 
             it("should return empty list if no platforms are present") {
@@ -71,7 +72,7 @@ class PlatformServiceTest : DescribeSpec({
             it("should return Right with Platform if valid id") {
                 // given
                 val id = 1L
-                val platform = Platform(id, "Platform 1")
+                val platform = Platform(id = id, name = "Platform 1")
                 every { repository.findByIdOrNull(id) } returns platform
 
                 // when
@@ -79,7 +80,7 @@ class PlatformServiceTest : DescribeSpec({
 
                 // then
                 result.isRight() shouldBe true
-                result.getOrNull() shouldBe platform
+                result.getOrNull() shouldBe platform.toDto()
             }
         }
 
@@ -90,7 +91,7 @@ class PlatformServiceTest : DescribeSpec({
                 every { repository.save(platform) } returns platform
 
                 // when
-                service.savePlatform(platform)
+                service.savePlatform(platform.toDto())
 
                 // then
                 verify(exactly = 1) { repository.save(platform) }
@@ -102,7 +103,7 @@ class PlatformServiceTest : DescribeSpec({
                 every { repository.save(platform) } returns platform
 
                 // when
-                val result = service.savePlatform(platform)
+                val result = service.savePlatform(platform.toDto())
 
                 // then
                 result shouldBe platform

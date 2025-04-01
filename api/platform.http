@@ -4,6 +4,10 @@
 
 GET {{url}}
 
+### GET platform by id
+
+GET {{url}}/2
+
 ### POST new platform with random name
 
 POST {{url}}
