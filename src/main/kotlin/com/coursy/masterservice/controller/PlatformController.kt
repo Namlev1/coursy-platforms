@@ -1,8 +1,8 @@
-package com.coursy.be.controller
+package com.coursy.masterservice.controller
 
-import com.coursy.be.model.platform.PlatformDto
-import com.coursy.be.model.platform.PlatformFailure
-import com.coursy.be.service.PlatformService
+import com.coursy.masterservice.model.platform.PlatformDto
+import com.coursy.masterservice.model.platform.PlatformFailure
+import com.coursy.masterservice.service.PlatformService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

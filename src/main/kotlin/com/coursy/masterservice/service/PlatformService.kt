@@ -1,9 +1,9 @@
-package com.coursy.be.service
+package com.coursy.masterservice.service
 
 import arrow.core.left
 import arrow.core.right
-import com.coursy.be.model.platform.*
-import com.coursy.be.repository.PlatformRepository
+import com.coursy.masterservice.model.platform.*
+import com.coursy.masterservice.repository.PlatformRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 

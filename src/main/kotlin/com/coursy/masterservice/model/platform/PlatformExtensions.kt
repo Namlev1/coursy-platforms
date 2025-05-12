@@ -1,4 +1,4 @@
-package com.coursy.be.model.platform
+package com.coursy.masterservice.model.platform
 
 fun Platform.toDto(): PlatformDto =
     PlatformDto(

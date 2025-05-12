@@ -1,1 +1,1 @@
-rootProject.name = "be"
+rootProject.name = "master-service"

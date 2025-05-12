@@ -1,4 +1,4 @@
-package com.coursy.be.config
+package com.coursy.masterservice.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.bind.annotation.RestController

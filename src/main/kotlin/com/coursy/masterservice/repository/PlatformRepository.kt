@@ -1,6 +1,6 @@
-package com.coursy.be.repository
+package com.coursy.masterservice.repository
 
-import com.coursy.be.model.platform.Platform
+import com.coursy.masterservice.model.platform.Platform
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

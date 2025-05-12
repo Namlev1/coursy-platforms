@@ -1,11 +1,11 @@
-package com.coursy.be
+package com.coursy.masterservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class BeApplication
+class MasterServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<BeApplication>(*args)
+    runApplication<MasterServiceApplication>(*args)
 }

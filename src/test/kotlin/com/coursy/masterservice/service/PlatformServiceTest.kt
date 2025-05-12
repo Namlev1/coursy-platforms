@@ -1,9 +1,9 @@
-package com.coursy.be.service
+package com.coursy.masterservice.service
 
-import com.coursy.be.model.platform.Platform
-import com.coursy.be.model.platform.PlatformFailure
-import com.coursy.be.model.platform.toDto
-import com.coursy.be.repository.PlatformRepository
+import com.coursy.masterservice.model.platform.Platform
+import com.coursy.masterservice.model.platform.PlatformFailure
+import com.coursy.masterservice.model.platform.toDto
+import com.coursy.masterservice.repository.PlatformRepository
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.collections.shouldBeEmpty
