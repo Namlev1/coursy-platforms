@@ -13,3 +13,8 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+server:
+  port: 9002
+auth:
+  service:
+    url: http://localhost:9000

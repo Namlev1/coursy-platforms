@@ -20,13 +20,18 @@ repositories {
 }
 
 dependencies {
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+
+    // Database
     runtimeOnly("org.postgresql:postgresql")
+
     // Arrow
     implementation("io.arrow-kt:arrow-core:2.0.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -37,8 +42,13 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.9.0")
     testImplementation("io.kotest:kotest-property:5.9.0")
     testImplementation("io.kotest:kotest-extensions-spring:6.0.0.M3")
+
     // For Arrow Either assertions
     testImplementation("io.kotest.extensions:kotest-assertions-arrow:2.0.0")
+
+    // Security, JWT
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("com.auth0:java-jwt:4.5.0")
 }
 
 kotlin {
