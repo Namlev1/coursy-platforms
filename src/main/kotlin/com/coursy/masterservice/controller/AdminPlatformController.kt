@@ -2,14 +2,17 @@ package com.coursy.masterservice.controller
 
 import com.coursy.masterservice.dto.PlatformDto
 import com.coursy.masterservice.failure.PlatformFailure
+import com.coursy.masterservice.security.UserDetailsImp
 import com.coursy.masterservice.service.PlatformService
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/platform")
-class PlatformController(val service: PlatformService) {
-
+@RequestMapping("/admin/platform")
+class AdminPlatformController(
+    val service: PlatformService
+) {
     @GetMapping
     fun getAllPlatforms() = service.getAllPlatforms()
 
@@ -20,7 +23,10 @@ class PlatformController(val service: PlatformService) {
     )
 
     @PostMapping
-    fun createPlatform(@RequestBody dto: PlatformDto) = service.savePlatform(dto)
+    fun createPlatform(
+        @RequestBody dto: PlatformDto,
+        @AuthenticationPrincipal user: UserDetailsImp
+    ) = service.savePlatform(dto, user.email)
 
     @DeleteMapping("/{id}")
     fun deletePlatform(@PathVariable id: Long) = service.deletePlatform(id)

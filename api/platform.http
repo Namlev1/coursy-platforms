@@ -1,17 +1,19 @@
-@url = {{host}}/platform
+@url = {{host}}/admin/platform
 
 ### GET all plaftorms
 
 GET {{url}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDcyMjEzMzksImV4cCI6MTc0NzIyNDkzOX0.ZqgK5PA0Aminx_MRk2INRAn7PF57UGxmKrlpSWitxLU
 
 ### GET platform by id
 
 GET {{url}}/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
 
 ### POST new platform with random name
 
 POST {{url}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
 Content-Type: application/json
 
 {
@@ -21,3 +23,4 @@ Content-Type: application/json
 ### DELETE platform by id
 
 DELETE {{url}}/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
