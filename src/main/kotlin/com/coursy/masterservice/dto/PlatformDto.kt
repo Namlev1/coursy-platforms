@@ -1,6 +1,7 @@
 package com.coursy.masterservice.dto
 
 import com.coursy.masterservice.model.Platform
+import com.coursy.masterservice.types.Email
 
 data class PlatformDto(
     val id: Long?,
@@ -13,8 +14,9 @@ fun Platform.toDto(): PlatformDto =
         name = this.name
     )
 
-fun PlatformDto.toModel(): Platform =
+fun PlatformDto.toModel(email: Email): Platform =
     Platform(
         id = this.id,
         name = this.name,
+        userEmail = email.value
     )
