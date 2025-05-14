@@ -3,6 +3,7 @@
 ### GET all plaftorms
 
 GET {{url}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
 
 ### GET platform by id
 
