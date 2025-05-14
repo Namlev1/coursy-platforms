@@ -1,4 +1,11 @@
-package com.coursy.masterservice.model.platform
+package com.coursy.masterservice.dto
+
+import com.coursy.masterservice.model.Platform
+
+data class PlatformDto(
+    val id: Long?,
+    val name: String,
+)
 
 fun Platform.toDto(): PlatformDto =
     PlatformDto(

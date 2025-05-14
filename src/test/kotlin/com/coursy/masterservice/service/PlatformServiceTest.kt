@@ -1,8 +1,8 @@
 package com.coursy.masterservice.service
 
-import com.coursy.masterservice.model.platform.Platform
-import com.coursy.masterservice.model.platform.PlatformFailure
-import com.coursy.masterservice.model.platform.toDto
+import com.coursy.masterservice.dto.toDto
+import com.coursy.masterservice.failure.PlatformFailure
+import com.coursy.masterservice.model.Platform
 import com.coursy.masterservice.repository.PlatformRepository
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.core.spec.style.DescribeSpec
