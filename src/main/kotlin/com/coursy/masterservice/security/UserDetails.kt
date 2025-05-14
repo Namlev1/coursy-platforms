@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails
 class UserDetailsImp(
     val email: Email,
     private val authorities: MutableCollection<SimpleGrantedAuthority>,
-    private val enabled: Boolean = true,
-    private val accountNonLocked: Boolean = true,
 ) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> = authorities
 
@@ -19,10 +17,10 @@ class UserDetailsImp(
 
     override fun isAccountNonExpired() = true
 
-    override fun isAccountNonLocked() = accountNonLocked
+    override fun isAccountNonLocked() = true
 
     override fun isCredentialsNonExpired() = true
 
-    override fun isEnabled() = enabled
+    override fun isEnabled() = true
 
 }
