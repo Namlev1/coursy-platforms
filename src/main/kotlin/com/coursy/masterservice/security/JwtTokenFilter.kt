@@ -49,12 +49,7 @@ class JwtTokenFilter(
         request: HttpServletRequest
     ): Either<JwtFailure, Unit> {
         return try {
-            val email = jwtUtils.getEmailFromToken(jwt)
-            val roles = jwtUtils.getRolesFromToken(jwt)
-            val userDetails = UserDetailsImp(
-                email = email,
-                authorities = roles
-            )
+            val userDetails = jwtUtils.getUserDetailsFromToken(jwt)
 
             val authentication = UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.authorities

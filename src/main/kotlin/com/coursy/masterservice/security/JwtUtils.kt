@@ -7,7 +7,6 @@ import com.coursy.masterservice.types.Email
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.stereotype.Component
-import java.util.Collections.emptyList
 
 @Component
 class JwtUtils(
@@ -20,25 +19,14 @@ class JwtUtils(
             .verify(token)
     }
 
-    // todo merge these 2 methods
-    fun getEmailFromToken(token: String): Email {
-        val email = verifyToken(token)
-            .subject
-        return Email(email)
+    fun getUserDetailsFromToken(token: String): UserDetailsImp {
+        val verified = verifyToken(token)
 
-    }
-
-    fun getRolesFromToken(token: String): MutableList<SimpleGrantedAuthority> {
-        val jwt = verifyToken(token)
-
-        val rolesClaim = jwt.getClaim("roles")
-
-
-        if (rolesClaim.isNull) {
-            return emptyList()
-        }
-
-        return rolesClaim.asList(String::class.java)
-            .map { role -> SimpleGrantedAuthority(role) } as MutableList<SimpleGrantedAuthority>
+        val email = Email(verified.subject)
+        val rolesClaim = verified
+            .getClaim("roles")
+            .asList(SimpleGrantedAuthority::class.java) as MutableList<SimpleGrantedAuthority>
+       
+        return UserDetailsImp(email, rolesClaim)
     }
 }
