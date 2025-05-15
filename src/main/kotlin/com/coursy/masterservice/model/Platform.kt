@@ -11,8 +11,9 @@ class Platform(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long?,
-    val userEmail: String,
-    var name: String
+    var userEmail: String,
+    var name: String,
+    var description: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -25,6 +26,6 @@ class Platform(
     override fun hashCode(): Int = javaClass.hashCode()
 
     override fun toString(): String {
-        return this::class.simpleName + "(  id = $id   ,  userEmail = $userEmail      name = $name )"
+        return this::class.simpleName + "(id = $id , userEmail = $userEmail , name = $name , description = $description )"
     }
 } 

@@ -3,24 +3,24 @@
 ### GET all plaftorms
 
 GET {{url}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDcyMjEzMzksImV4cCI6MTc0NzIyNDkzOX0.ZqgK5PA0Aminx_MRk2INRAn7PF57UGxmKrlpSWitxLU
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDczMDI0ODksImV4cCI6MTc0NzMwNjA4OX0.-d5WBf0aT4pjQQ9j8cP1EVQRKNEoKF7caJf_Ti-iJiw
 ### GET platform by id
 
 GET {{url}}/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDczMDI0ODksImV4cCI6MTc0NzMwNjA4OX0.-d5WBf0aT4pjQQ9j8cP1EVQRKNEoKF7caJf_Ti-iJiw
 
-### POST new platform with random name
+### POST new random platform
 
 POST {{url}}
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDczMDI0ODksImV4cCI6MTc0NzMwNjA4OX0.-d5WBf0aT4pjQQ9j8cP1EVQRKNEoKF7caJf_Ti-iJiw
 Content-Type: application/json
 
 {
-  "name": "{{$random.alphabetic(10)}}"
+  "name": "{{$random.alphabetic(10)}}",
+  "description": "{{$random.alphabetic(30)}}"
 }
 
 ### DELETE platform by id
 
-DELETE {{url}}/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTc0NzIxODQzNywiZXhwIjoxNzQ3MjIyMDM3fQ.DXd2cgWzIR1cPV4_jCN_F0E-5mBk7-JuH0KJrqgfLpI
+DELETE {{url}}/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJpWEFteHpoRTJXZ0xXQjJWQUVXQEh1QmhZWnguY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDczMDI0ODksImV4cCI6MTc0NzMwNjA4OX0.-d5WBf0aT4pjQQ9j8cP1EVQRKNEoKF7caJf_Ti-iJiw
