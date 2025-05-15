@@ -22,7 +22,7 @@ class JwtUtils(
     fun getUserDetailsFromToken(token: String): UserDetailsImp {
         val verified = verifyToken(token)
 
-        val email = Email(verified.subject)
+        val email = Email.create(verified.subject).getOrNull()!!
         val rolesClaim = verified
             .getClaim("roles")
             .asList(SimpleGrantedAuthority::class.java) as MutableList<SimpleGrantedAuthority>
