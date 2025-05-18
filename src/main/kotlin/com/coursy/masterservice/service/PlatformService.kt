@@ -1,5 +1,6 @@
 package com.coursy.masterservice.service
 
+import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import com.coursy.masterservice.dto.PlatformRequest
@@ -27,6 +28,15 @@ class PlatformService(val repo: PlatformRepository) {
         .right()
 
     fun deletePlatform(id: Long) = repo.deleteById(id)
+
+    fun deletePlatform(platformId: Long, userEmail: Email): Either<PlatformFailure, Unit> {
+        val platform = repo.findByIdOrNull(platformId) ?: return PlatformFailure.NotFound(platformId).left()
+        if (platform.userEmail != userEmail.value)
+            return PlatformFailure.InvalidEmail(userEmail, platformId).left()
+
+        repo.deleteById(platformId)
+        return Unit.right()
+    } 
 
     fun getById(id: Long) =
         repo
