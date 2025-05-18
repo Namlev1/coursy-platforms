@@ -20,7 +20,6 @@ class SecurityConfig(
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/v1/auth/**").permitAll()
                     .requestMatchers("/v1/admin/**").hasAuthority(RoleName.ROLE_ADMIN.name)
                     .anyRequest().authenticated()
             }
