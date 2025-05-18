@@ -41,7 +41,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.9.0")
     testImplementation("io.kotest:kotest-assertions-core:5.9.0")
     testImplementation("io.kotest:kotest-property:5.9.0")
-    testImplementation("io.kotest:kotest-extensions-spring:6.0.0.M3")
+    implementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
 
     // For Arrow Either assertions
     testImplementation("io.kotest.extensions:kotest-assertions-arrow:2.0.0")
@@ -49,6 +49,7 @@ dependencies {
     // Security, JWT
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.auth0:java-jwt:4.5.0")
+    testImplementation("org.springframework.security:spring-security-test:6.4.5")
 }
 
 kotlin {
