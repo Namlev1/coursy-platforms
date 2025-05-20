@@ -22,7 +22,10 @@ class AdminPlatformController(
     )
 
     @DeleteMapping("/{id}")
-    fun deletePlatform(@PathVariable id: Long) = service.deletePlatform(id)
+    fun deletePlatform(@PathVariable id: Long): ResponseEntity<Any> {
+        service.deletePlatform(id)
+        return ResponseEntity.noContent().build()
+    } 
 
     private fun handleFailure(failure: Failure): ResponseEntity<Any> =
         when (failure) {

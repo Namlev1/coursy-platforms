@@ -10,6 +10,7 @@ import com.coursy.masterservice.types.Email
 import com.coursy.masterservice.types.Name
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
+import io.kotest.matchers.optional.shouldNotBePresent
 import jakarta.transaction.Transactional
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.delete
 import org.springframework.test.web.servlet.get
 
 @SpringBootTest
@@ -102,6 +104,21 @@ class AdminPlatformControllerTest(
                     .andExpect {
                         status { isNotFound() }
                     }
+            }
+        }
+
+        describe("Delete platform") {
+            it("should delete platform by ID") {
+                platformService.savePlatform(testPlatform, testEmail)
+                val id = platformRepo.getByUserEmail(testEmail.value)[0].id
+                authorizeNextRequest()
+
+                mockMvc.delete("$adminUrl/$id")
+                    .andExpect {
+                        status { isNoContent() }
+                    }
+
+                platformRepo.findById(id!!).shouldNotBePresent()
             }
         }
     }
