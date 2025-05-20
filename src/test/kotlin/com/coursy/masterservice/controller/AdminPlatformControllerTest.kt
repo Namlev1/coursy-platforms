@@ -1,6 +1,7 @@
 package com.coursy.masterservice.controller
 
 import com.coursy.masterservice.dto.PlatformRequest
+import com.coursy.masterservice.repository.PlatformRepository
 import com.coursy.masterservice.security.RoleName
 import com.coursy.masterservice.security.UserDetailsImp
 import com.coursy.masterservice.service.PlatformService
@@ -25,7 +26,8 @@ import org.springframework.test.web.servlet.get
 @Transactional
 class AdminPlatformControllerTest(
     private val mockMvc: MockMvc,
-    private val platformService: PlatformService
+    private val platformService: PlatformService,
+    private val platformRepo: PlatformRepository
 ) : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
 
@@ -75,6 +77,30 @@ class AdminPlatformControllerTest(
                     .andExpect {
                         status { isOk() }
                         jsonPath("$") { isEmpty() }
+                    }
+            }
+        }
+
+        describe("Get platform by id") {
+            it("should return platform response") {
+                platformService.savePlatform(testPlatform, testEmail)
+                val id = platformRepo.getByUserEmail(testEmail.value)[0].id
+                authorizeNextRequest()
+
+                mockMvc.get("$adminUrl/$id")
+                    .andExpect {
+                        status { isOk() }
+                        jsonPath("$.name") { value(testName.value) }
+                        jsonPath("$.id") { value(id) }
+                    }
+            }
+
+            it("should return not found") {
+                authorizeNextRequest()
+
+                mockMvc.get("$adminUrl/1")
+                    .andExpect {
+                        status { isNotFound() }
                     }
             }
         }
