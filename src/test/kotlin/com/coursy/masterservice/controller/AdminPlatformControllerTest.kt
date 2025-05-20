@@ -1,13 +1,17 @@
 package com.coursy.masterservice.controller
 
+import com.coursy.masterservice.dto.PlatformRequest
 import com.coursy.masterservice.security.RoleName
 import com.coursy.masterservice.security.UserDetailsImp
+import com.coursy.masterservice.service.PlatformService
+import com.coursy.masterservice.types.Description
 import com.coursy.masterservice.types.Email
+import com.coursy.masterservice.types.Name
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
+import jakarta.transaction.Transactional
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.MediaType
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
@@ -18,12 +22,18 @@ import org.springframework.test.web.servlet.get
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
+@Transactional
 class AdminPlatformControllerTest(
-    private val mockMvc: MockMvc
+    private val mockMvc: MockMvc,
+    private val platformService: PlatformService
 ) : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
 
     val adminUrl = "/v1/admin/platform"
+    val testEmail = Email.create("test_email@email.com").getOrNull()!!
+    val testName = Name.create("test name").getOrNull()!!
+    val testDescription = Description.create("test description").getOrNull()!!
+    val testPlatform = PlatformRequest.Validated(testName, testDescription)
 
     init {
         describe("Authorization") {
@@ -47,12 +57,25 @@ class AdminPlatformControllerTest(
         }
 
         describe("Get all platforms") {
-            it("should pass") {
+            it("should return non-empty list") {
+                platformService.savePlatform(testPlatform, testEmail)
                 authorizeNextRequest()
-                mockMvc.get("$adminUrl") {
-                    accept(MediaType.APPLICATION_JSON)
-                }
-                    .andExpect { status { isOk() } }
+
+                mockMvc.get(adminUrl)
+                    .andExpect {
+                        status { isOk() }
+                        jsonPath("$.[0].name") { value(testName.value) }
+                    }
+            }
+
+            it("should return empty list") {
+                authorizeNextRequest()
+
+                mockMvc.get(adminUrl)
+                    .andExpect {
+                        status { isOk() }
+                        jsonPath("$") { isEmpty() }
+                    }
             }
         }
     }
