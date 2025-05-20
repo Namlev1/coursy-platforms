@@ -2,13 +2,17 @@ spring:
   application:
     name: be
   datasource:
-    url: jdbc:postgresql://localhost:5432/coursy-db
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
 server:
   port: 9002
 auth:

@@ -31,6 +31,7 @@ dependencies {
 
     // Database
     runtimeOnly("org.postgresql:postgresql")
+    testImplementation("com.h2database:h2:2.3.232")
 
     // Arrow
     implementation("io.arrow-kt:arrow-core:2.0.1")
