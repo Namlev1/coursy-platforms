@@ -1,22 +1,13 @@
 package com.coursy.masterservice.controller
 
-import com.coursy.masterservice.dto.PlatformRequest
 import com.coursy.masterservice.repository.PlatformRepository
-import com.coursy.masterservice.security.RoleName
-import com.coursy.masterservice.security.UserDetailsImp
 import com.coursy.masterservice.service.PlatformService
-import com.coursy.masterservice.types.Description
-import com.coursy.masterservice.types.Email
-import com.coursy.masterservice.types.Name
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.optional.shouldNotBePresent
 import jakarta.transaction.Transactional
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.delete
@@ -32,12 +23,12 @@ class AdminPlatformControllerTest(
     private val platformRepo: PlatformRepository
 ) : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
+    val fixtures = ControllerTestFixtures()
 
-    val adminUrl = "/v1/admin/platform"
-    val testEmail = Email.create("test_email@email.com").getOrNull()!!
-    val testName = Name.create("test name").getOrNull()!!
-    val testDescription = Description.create("test description").getOrNull()!!
-    val testPlatform = PlatformRequest.Validated(testName, testDescription)
+    val adminUrl = fixtures.adminUrl
+    val testEmail = fixtures.testEmail
+    val testName = fixtures.testName
+    val testPlatform = fixtures.testPlatformRequest
 
     init {
         describe("Authorization") {
@@ -47,13 +38,13 @@ class AdminPlatformControllerTest(
             }
 
             it("should not allow authorized user") {
-                authorizeNextRequest(isAdmin = false)
+                fixtures.authorizeNextRequest(isAdmin = false)
                 mockMvc.get(adminUrl)
                     .andExpect { status { isForbidden() } }
             }
 
             it("should allow authorized admin") {
-                authorizeNextRequest(isAdmin = true)
+                fixtures.authorizeNextRequest(isAdmin = true)
                 mockMvc.get(adminUrl)
                     .andExpect { status { isOk() } }
 
@@ -63,7 +54,7 @@ class AdminPlatformControllerTest(
         describe("Get all platforms") {
             it("should return non-empty list") {
                 platformService.savePlatform(testPlatform, testEmail)
-                authorizeNextRequest()
+                fixtures.authorizeNextRequest()
 
                 mockMvc.get(adminUrl)
                     .andExpect {
@@ -73,7 +64,7 @@ class AdminPlatformControllerTest(
             }
 
             it("should return empty list") {
-                authorizeNextRequest()
+                fixtures.authorizeNextRequest()
 
                 mockMvc.get(adminUrl)
                     .andExpect {
@@ -87,7 +78,7 @@ class AdminPlatformControllerTest(
             it("should return platform response") {
                 platformService.savePlatform(testPlatform, testEmail)
                 val id = platformRepo.getByUserEmail(testEmail.value)[0].id
-                authorizeNextRequest()
+                fixtures.authorizeNextRequest()
 
                 mockMvc.get("$adminUrl/$id")
                     .andExpect {
@@ -98,7 +89,7 @@ class AdminPlatformControllerTest(
             }
 
             it("should return not found") {
-                authorizeNextRequest()
+                fixtures.authorizeNextRequest()
 
                 mockMvc.get("$adminUrl/1")
                     .andExpect {
@@ -111,7 +102,7 @@ class AdminPlatformControllerTest(
             it("should delete platform by ID") {
                 platformService.savePlatform(testPlatform, testEmail)
                 val id = platformRepo.getByUserEmail(testEmail.value)[0].id
-                authorizeNextRequest()
+                fixtures.authorizeNextRequest()
 
                 mockMvc.delete("$adminUrl/$id")
                     .andExpect {
@@ -123,16 +114,4 @@ class AdminPlatformControllerTest(
         }
     }
 
-    fun authorizeNextRequest(isAdmin: Boolean = true) {
-        val email = Email.create("aoe@aoeu.com").getOrNull()!!
-        val roleName = if (isAdmin) RoleName.ROLE_ADMIN else RoleName.ROLE_USER
-        val authorities = mutableListOf(SimpleGrantedAuthority(roleName.toString()))
-        val userDetails = UserDetailsImp(email, authorities)
-
-        val authentication = UsernamePasswordAuthenticationToken(
-            userDetails, null, userDetails.authorities
-        )
-
-        SecurityContextHolder.getContext().authentication = authentication
-    }
 }
