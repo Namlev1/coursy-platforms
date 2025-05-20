@@ -11,29 +11,56 @@ import org.springframework.http.MediaType
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class AdminPlatformControllerTest(
     private val mockMvc: MockMvc
 ) : DescribeSpec() {
     override fun extensions() = listOf(SpringExtension)
 
+    val adminUrl = "/v1/admin/platform"
+
     init {
-        it("should pass") {
-            login()
-            mockMvc.get("/v1/admin/platform/lol") {
-                accept(MediaType.APPLICATION_JSON)
+        describe("Authorization") {
+            it("should not allow unauthorized access") {
+                mockMvc.get(adminUrl)
+                    .andExpect { status { isForbidden() } }
             }
-                .andExpect { status { isOk() } }
+
+            it("should not allow authorized user") {
+                authorizeNextRequest(isAdmin = false)
+                mockMvc.get(adminUrl)
+                    .andExpect { status { isForbidden() } }
+            }
+
+            it("should allow authorized admin") {
+                authorizeNextRequest(isAdmin = true)
+                mockMvc.get(adminUrl)
+                    .andExpect { status { isOk() } }
+
+            }
+        }
+
+        describe("Get all platforms") {
+            it("should pass") {
+                authorizeNextRequest()
+                mockMvc.get("$adminUrl") {
+                    accept(MediaType.APPLICATION_JSON)
+                }
+                    .andExpect { status { isOk() } }
+            }
         }
     }
 
-    fun login() {
+    fun authorizeNextRequest(isAdmin: Boolean = true) {
         val email = Email.create("aoe@aoeu.com").getOrNull()!!
-        val authorities = mutableListOf(SimpleGrantedAuthority(RoleName.ROLE_ADMIN.toString()))
+        val roleName = if (isAdmin) RoleName.ROLE_ADMIN else RoleName.ROLE_USER
+        val authorities = mutableListOf(SimpleGrantedAuthority(roleName.toString()))
         val userDetails = UserDetailsImp(email, authorities)
 
         val authentication = UsernamePasswordAuthenticationToken(
