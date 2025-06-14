@@ -1,1 +1,1 @@
-rootProject.name = "master-service"
+rootProject.name = "platforms"
