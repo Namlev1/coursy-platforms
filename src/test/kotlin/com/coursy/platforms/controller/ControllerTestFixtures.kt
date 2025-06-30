@@ -11,8 +11,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 
 class ControllerTestFixtures {
-    val adminUrl = "/v1/admin/platform"
-    val userUrl = "/v1/user/platform"
+    val adminUrl = "/api/admin/platform"
+    val userUrl = "/api/user/platform"
     val testEmail = Email.create("test_email@email.com").getOrNull()!!
     val testName = Name.create("test name").getOrNull()!!
     val testDescription = Description.create("test description").getOrNull()!!

@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/admin/platform")
+@RequestMapping("/api/admin/platform")
 class AdminPlatformController(
     val service: PlatformService
 ) {
