@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtTokenFilter: JwtTokenFilter
+    private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) {
 
     @Bean
@@ -24,7 +24,7 @@ class SecurityConfig(
                     .anyRequest().authenticated()
             }
 
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 }

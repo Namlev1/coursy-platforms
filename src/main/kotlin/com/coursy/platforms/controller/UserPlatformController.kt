@@ -2,13 +2,14 @@ package com.coursy.platforms.controller
 
 import arrow.core.flatMap
 import com.coursy.platforms.dto.PlatformRequest
+import com.coursy.platforms.dto.PlatformResponse
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.PlatformFailure
-import com.coursy.platforms.security.UserDetailsImp
+import com.coursy.platforms.security.readToken
 import com.coursy.platforms.service.PlatformService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -16,28 +17,37 @@ import org.springframework.web.bind.annotation.*
 class UserPlatformController(val service: PlatformService) {
 
     @GetMapping
-    fun getAllPlatforms(@AuthenticationPrincipal user: UserDetailsImp) =
-        service.getByUserEmail(user.email)
+    fun getAllPlatforms(jwt: PreAuthenticatedAuthenticationToken): List<PlatformResponse> {
+        val (email, _) = jwt.readToken()
+        return service.getByUserEmail(email)
+
+    }
 
 
     @PostMapping
     fun createPlatform(
         @RequestBody request: PlatformRequest,
-        @AuthenticationPrincipal user: UserDetailsImp
-    ): ResponseEntity<Any> = request
-        .validate()
-        .flatMap { service.savePlatform(it, user.email) }
-        .fold(
-            { handleFailure(it) },
-            { ResponseEntity.status(HttpStatus.CREATED).build() }
-        )
+        jwt: PreAuthenticatedAuthenticationToken
+    ): ResponseEntity<Any> {
+        val (email, _) = jwt.readToken()
+
+        return request
+            .validate()
+            .flatMap { service.savePlatform(it, email) }
+            .fold(
+                { handleFailure(it) },
+                { ResponseEntity.status(HttpStatus.CREATED).build() }
+            )
+    }
 
     @DeleteMapping("/{id}")
     fun deletePlatform(
         @PathVariable id: Long,
-        @AuthenticationPrincipal user: UserDetailsImp
+        jwt: PreAuthenticatedAuthenticationToken
     ) {
-        service.deletePlatform(id, user.email)
+        val (email, _) = jwt.readToken()
+
+        service.deletePlatform(id, email)
             .fold(
                 { handleFailure(it) },
                 { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }

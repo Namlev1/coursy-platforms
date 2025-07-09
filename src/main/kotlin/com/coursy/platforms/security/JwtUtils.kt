@@ -1,32 +1,13 @@
 package com.coursy.platforms.security
 
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.coursy.platforms.types.Email
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.stereotype.Component
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
+import java.util.*
 
-@Component
-class JwtUtils(
-    @Value("\${jwt.secret}")
-    private val jwtSecret: String
-) {
-    private fun verifyToken(token: String): DecodedJWT {
-        return JWT.require(Algorithm.HMAC256(jwtSecret))
-            .build()
-            .verify(token)
-    }
-
-    fun getUserDetailsFromToken(token: String): UserDetailsImp {
-        val verified = verifyToken(token)
-
-        val email = Email.create(verified.subject).getOrNull()!!
-        val rolesClaim = verified
-            .getClaim("roles")
-            .asList(SimpleGrantedAuthority::class.java) as MutableList<SimpleGrantedAuthority>
-       
-        return UserDetailsImp(email, rolesClaim)
-    }
+fun PreAuthenticatedAuthenticationToken.readToken(): Pair<Email, UUID> {
+    val jwt = this.credentials as DecodedJWT
+    val id = UUID.fromString(jwt.getClaim("id").asString())
+    val email = this.principal as Email
+    return Pair(email, id)
 }
