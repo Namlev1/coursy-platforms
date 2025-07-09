@@ -15,13 +15,14 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.mockk.*
 import org.springframework.data.repository.findByIdOrNull
+import java.util.*
 
 class PlatformServiceTest : DescribeSpec({
 
     class TestFixtures {
         // Common values
-        val platformId = 1L
-        val nonExistentId = 99L
+        val platformId = UUID.randomUUID()
+        val nonExistentId = UUID.randomUUID()
 
         // Platform data
         val platformName = "Test Platform"
@@ -40,7 +41,7 @@ class PlatformServiceTest : DescribeSpec({
 
         // Platform object
         fun createPlatform(
-            id: Long? = platformId,
+            id: UUID = platformId,
             name: String = platformName,
             description: String = platformDescription,
             userEmail: String = this.userEmail.value
@@ -73,7 +74,7 @@ class PlatformServiceTest : DescribeSpec({
         describe("Get All Platforms") {
             it("should return a list of all platforms") {
                 // given
-                val platforms = listOf(fixtures.createPlatform(), fixtures.createPlatform(id = 2L))
+                val platforms = listOf(fixtures.createPlatform(), fixtures.createPlatform(id = UUID.randomUUID()))
                 val expectedResponses = platforms.map { it.toResponse() }
 
                 every { platformRepository.findAll() } returns platforms
@@ -182,7 +183,7 @@ class PlatformServiceTest : DescribeSpec({
             it("should return platforms for the user") {
                 // given
                 val userEmail = fixtures.userEmail
-                val platforms = listOf(fixtures.createPlatform(), fixtures.createPlatform(id = 2L))
+                val platforms = listOf(fixtures.createPlatform(), fixtures.createPlatform(id = UUID.randomUUID()))
                 val expectedResponses = platforms.map { it.toResponse() }
 
                 every { platformRepository.getByUserEmail(userEmail.value) } returns platforms

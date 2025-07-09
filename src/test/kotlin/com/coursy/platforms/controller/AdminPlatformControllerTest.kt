@@ -12,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.delete
 import org.springframework.test.web.servlet.get
+import java.util.*
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -84,14 +85,14 @@ class AdminPlatformControllerTest(
                     .andExpect {
                         status { isOk() }
                         jsonPath("$.name") { value(testName.value) }
-                        jsonPath("$.id") { value(id) }
+                        jsonPath("$.id") { value(id.toString()) }
                     }
             }
 
             it("should return not found") {
                 fixtures.authorizeNextRequest()
 
-                mockMvc.get("$adminUrl/1")
+                mockMvc.get("$adminUrl/${UUID.randomUUID()}")
                     .andExpect {
                         status { isNotFound() }
                     }
