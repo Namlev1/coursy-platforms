@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/api/user/platform")
@@ -42,7 +43,7 @@ class UserPlatformController(val service: PlatformService) {
 
     @DeleteMapping("/{id}")
     fun deletePlatform(
-        @PathVariable id: Long,
+        @PathVariable id: UUID,
         jwt: PreAuthenticatedAuthenticationToken
     ) {
         val (email, _) = jwt.readToken()

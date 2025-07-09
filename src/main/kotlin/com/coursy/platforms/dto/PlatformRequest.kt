@@ -18,7 +18,6 @@ data class PlatformRequest(
         val description: Description
     ) {
         fun toModel(userEmail: Email) = Platform(
-            id = null,
             userEmail = userEmail.value,
             name = this.name.value,
             description = this.description.value

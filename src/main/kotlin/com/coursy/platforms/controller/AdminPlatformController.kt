@@ -6,6 +6,7 @@ import com.coursy.platforms.service.PlatformService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/api/admin/platform")
@@ -16,13 +17,13 @@ class AdminPlatformController(
     fun getAllPlatforms() = service.getAllPlatforms()
 
     @GetMapping("/{id}")
-    fun getPlatformById(@PathVariable id: Long) = service.getById(id).fold(
+    fun getPlatformById(@PathVariable id: UUID) = service.getById(id).fold(
         { failure -> handleFailure(failure) },
         { platformDto -> ResponseEntity.ok(platformDto) }
     )
 
     @DeleteMapping("/{id}")
-    fun deletePlatform(@PathVariable id: Long): ResponseEntity<Any> {
+    fun deletePlatform(@PathVariable id: UUID): ResponseEntity<Any> {
         service.deletePlatform(id)
         return ResponseEntity.noContent().build()
     } 

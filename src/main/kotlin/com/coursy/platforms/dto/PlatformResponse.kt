@@ -1,9 +1,10 @@
 package com.coursy.platforms.dto
 
 import com.coursy.platforms.model.Platform
+import java.util.*
 
 data class PlatformResponse(
-    val id: Long?,
+    val id: UUID,
     val name: String,
     val description: String
 )

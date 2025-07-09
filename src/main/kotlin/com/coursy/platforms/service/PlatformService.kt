@@ -12,6 +12,7 @@ import com.coursy.platforms.repository.PlatformRepository
 import com.coursy.platforms.types.Email
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class PlatformService(val repo: PlatformRepository) {
@@ -27,18 +28,18 @@ class PlatformService(val repo: PlatformRepository) {
         .save(dto.toModel(email))
         .right()
 
-    fun deletePlatform(id: Long) = repo.deleteById(id)
+    fun deletePlatform(id: UUID) = repo.deleteById(id)
 
-    fun deletePlatform(platformId: Long, userEmail: Email): Either<PlatformFailure, Unit> {
+    fun deletePlatform(platformId: UUID, userEmail: Email): Either<PlatformFailure, Unit> {
         val platform = repo.findByIdOrNull(platformId) ?: return PlatformFailure.NotFound(platformId).left()
         if (platform.userEmail != userEmail.value)
             return PlatformFailure.InvalidEmail(userEmail, platformId).left()
 
         repo.deleteById(platformId)
         return Unit.right()
-    } 
+    }
 
-    fun getById(id: Long) =
+    fun getById(id: UUID) =
         repo
             .findByIdOrNull(id)?.toResponse()?.right()
             ?: PlatformFailure.NotFound(id).left()
