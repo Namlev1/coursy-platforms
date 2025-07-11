@@ -1,6 +1,6 @@
 spring:
   application:
-    name: coursy-platforms
+    name: platforms
   datasource:
     url: jdbc:postgresql://localhost:5432/platforms_db
     username: postgres
