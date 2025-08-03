@@ -2,23 +2,22 @@ package com.coursy.platforms.model
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate
-import java.util.*
 
 @Entity
-class Platform(
+class PageTemplate(
     @Id
-    var id: UUID = UUID.randomUUID(),
-    var userEmail: String,
-    var name: String,
-    var description: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0,
+    var title: String,
+
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "platform_id")
-    var templates: MutableList<PageTemplate> = mutableListOf()
+    @JoinColumn(name = "page_template_id")
+    var sections: MutableList<PageSection> = mutableListOf(),
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Platform
+        other as PageTemplate
 
         return id == other.id
     }
