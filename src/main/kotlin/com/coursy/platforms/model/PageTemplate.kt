@@ -2,12 +2,12 @@ package com.coursy.platforms.model
 
 import jakarta.persistence.*
 import org.hibernate.Hibernate
+import java.util.*
 
 @Entity
 class PageTemplate(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0,
+    var id: UUID = UUID.randomUUID(),
     var title: String,
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
