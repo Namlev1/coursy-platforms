@@ -36,7 +36,7 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
 
             val authentication = PreAuthenticatedAuthenticationToken(
                 email,
-                token,
+                jwt,
                 authorities
             )
             authentication.isAuthenticated = true
