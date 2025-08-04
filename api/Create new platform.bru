@@ -1,0 +1,37 @@
+meta {
+  name: Create new platform
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/user/platform
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6ImQ0MjdmZGVhY2E5MDI5MTYxNmI5ZTc0ZGE0NzNhMTIyIn0.eyJzdWIiOiJteUBlbWFpbC5jb20iLCJpZCI6ImI3YzMzZDdkLTY4MmItNDAxOC1hODNhLWMzMzY1NWU4NGU2NiIsInJvbGVzIjpbIlVTRVIiXX0.DnnThty9583rmA80HScC6jhg18SLXmIJQ-x-X3TPLnGFDcqyvsPryMso8NPfpoo3rKVf5n8SkgdxXOQyXlUpaQ
+}
+
+body:json {
+  {
+    "name": "test platform 2",
+    "description": "whatever description 2",
+    "theme": {
+      "courseListLayout": "Grid",
+      "videoPlayerType": "Minimal",
+      "colors": {
+        "primary": "#0d7ff3",
+        "secondary": "#000000",
+        "tertiary": "#000000",
+        "background": "#fefeff",
+        "textPrimary": "#000000"
+      }
+    }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

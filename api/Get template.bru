@@ -1,0 +1,24 @@
+meta {
+  name: Get template
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/platforms/:platformId/templates/:type
+  body: none
+  auth: bearer
+}
+
+params:path {
+  type: Home
+  platformId: 4e1c791d-c481-4f9a-9eff-b701c2875c5f
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6ImQ0MjdmZGVhY2E5MDI5MTYxNmI5ZTc0ZGE0NzNhMTIyIn0.eyJzdWIiOiJteUBlbWFpbC5jb20iLCJpZCI6ImI3YzMzZDdkLTY4MmItNDAxOC1hODNhLWMzMzY1NWU4NGU2NiIsInJvbGVzIjpbIlVTRVIiXX0.DnnThty9583rmA80HScC6jhg18SLXmIJQ-x-X3TPLnGFDcqyvsPryMso8NPfpoo3rKVf5n8SkgdxXOQyXlUpaQ
+}
+
+settings {
+  encodeUrl: true
+}
