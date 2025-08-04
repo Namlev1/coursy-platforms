@@ -8,7 +8,9 @@ import com.coursy.platforms.dto.PageTemplateResponse
 import com.coursy.platforms.dto.toResponse
 import com.coursy.platforms.failure.AuthorizationFailure
 import com.coursy.platforms.failure.Failure
+import com.coursy.platforms.failure.PageTemplateFailure
 import com.coursy.platforms.failure.PlatformFailure
+import com.coursy.platforms.model.PageType
 import com.coursy.platforms.repository.PageTemplateRepository
 import com.coursy.platforms.repository.PlatformRepository
 import com.coursy.platforms.security.RoleName
@@ -22,6 +24,16 @@ class PageTemplateService(
     val templateRepo: PageTemplateRepository,
     val platformRepo: PlatformRepository
 ) {
+    fun find(
+        platformId: UUID,
+        type: PageType,
+    ): Either<Failure, PageTemplateResponse> {
+        val platform = platformRepo.findByIdOrNull(platformId) ?: return PlatformFailure.NotFound(platformId).left()
+        val template = platform.templates.find { it.type == type }
+            ?: return PageTemplateFailure.InvalidType(type.toString()).left()
+
+        return template.toResponse().right()
+    }
 
     fun saveTemplate(
         platformId: UUID,

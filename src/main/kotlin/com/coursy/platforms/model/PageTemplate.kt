@@ -9,6 +9,8 @@ class PageTemplate(
     @Id
     var id: UUID = UUID.randomUUID(),
     var title: String,
+    @Enumerated(EnumType.STRING)
+    var type: PageType,
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "page_template_id")
