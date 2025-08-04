@@ -5,26 +5,23 @@ import org.hibernate.Hibernate
 import java.util.*
 
 @Entity
-class Platform(
+class Theme(
     @Id
     var id: UUID = UUID.randomUUID(),
-    var userEmail: String,
-    var name: String,
-    var description: String,
-    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "platform_id")
-    var templates: MutableList<PageTemplate> = mutableListOf(),
-    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    @JoinColumn(name = "theme_id", referencedColumnName = "id")
-    var theme: Theme
+    @Enumerated(EnumType.STRING)
+    var courseListLayout: CourseListLayout,
+    @Enumerated(EnumType.STRING)
+    var videoPlayerType: VideoPlayerType,
+    @Embedded
+    var colors: Colors,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Platform
+        other as Theme
 
         return id == other.id
     }
 
     override fun hashCode(): Int = javaClass.hashCode()
-} 
+}
