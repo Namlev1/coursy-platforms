@@ -17,7 +17,7 @@ class PageTemplatesController(
 ) {
 
     @GetMapping("/{type}")
-    fun getByTitle(
+    fun getByType(
         @PathVariable platformId: UUID,
         @PathVariable type: PageType
     ): ResponseEntity<Any> {
