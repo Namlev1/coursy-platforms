@@ -14,6 +14,8 @@ class Theme(
     var videoPlayerType: VideoPlayerType,
     @Embedded
     var colors: Colors,
+    @OneToOne(mappedBy = "theme")
+    var platform: Platform? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

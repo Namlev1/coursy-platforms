@@ -15,75 +15,28 @@ params:path {
 }
 
 auth:bearer {
-  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6ImQ0MjdmZGVhY2E5MDI5MTYxNmI5ZTc0ZGE0NzNhMTIyIn0.eyJzdWIiOiJteUBlbWFpbC5jb20iLCJpZCI6ImI3YzMzZDdkLTY4MmItNDAxOC1hODNhLWMzMzY1NWU4NGU2NiIsInJvbGVzIjpbIlVTRVIiXX0.DnnThty9583rmA80HScC6jhg18SLXmIJQ-x-X3TPLnGFDcqyvsPryMso8NPfpoo3rKVf5n8SkgdxXOQyXlUpaQ
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjBhOTRjODBlZmI3MGUxYmIyOTlhYjhlM2FhNTgwODI2In0.eyJzdWIiOiJtZUBlbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJyb2xlcyI6WyJBRE1JTiJdfQ.qSKTr2Ygtm9_6t6JibZfjLHSTV-mOpyN9iK9Ug7iP2CX7UI3K-xtx4fCPmZDD4XZ8BrQM2yCJuIkO-bKpb39_A
 }
 
 body:json {
   {
-    "title": "Coursy - Empower Your Organization",
+    "title": "Coursy - Course creation",
+    "type": "CourseCreation",
     "sections": [
-      {
-        "type": "header",
-        "order": 1,
-        "props": {
-          "logoText": "Coursy",
-          "navigation": [
-            {
-              "label": "Home",
-              "href": "#",
-              "access": "public"
-            },
-            {
-              "label": "Features",
-              "href": "#",
-              "access": "public"
-            },
-            {
-              "label": "Pricing",
-              "href": "#",
-              "access": "public"
-            },
-            {
-              "label": "Contact",
-              "href": "#",
-              "access": "public"
-            }
-          ]
-        }
-      },
-      {
-        "type": "hero",
-        "order": 2,
-        "props": {
-          "title": "Empower Your Organization with Custom Learning Platforms",
-          "subtitle": "Coursy provides a seamless solution for organizations to create, manage, and deliver engaging video courses. Build your own branded learning experience and empower your team.",
-          "backgroundImage": "https://lh3.googleusercontent.com/aida-public/AB6AXuCE2HQLyVW3z1J0nWJAyww3te-dZ5YmUxPFtAyOvPHxavjxrL5rxADflMB90-_i8cWTmApqUYiO9iqfxAUDvzXem-pBeoqS4Qq7anfHj-0b3W9nZLMVIKpdzIAfFvkq850fxrAh6wDAWETZIV7UWURRbvn2NKBJmeyWTioZqcqLDCfkCfCHHzdqXESYeYfF50hva1Rs5jR_LZTiu4IPuzPn6ZByIGELOknYXeg91shwuQmJXkkL9J6ho-YZYmKU08OQ2Bz7_OI5PbE",
-          "ctaText": "Create Your Platform",
-          "ctaHref": "/signup"
-        }
-      },
-      {
-        "type": "footer",
-        "order": 3,
-        "props": {
-          "links": [
-            {
-              "label": "Terms of Service",
-              "href": "#"
-            },
-            {
-              "label": "Privacy Policy",
-              "href": "#"
-            },
-            {
-              "label": "Contact Us",
-              "href": "#"
-            }
-          ],
-          "copyright": "© 2025 Coursy. All rights reserved."
-        }
+    {
+      "type": "page-header",
+      "order": 1,
+      "props": {
+        "title": "Create a new course",
+        "subtitle": "Fill in the details below to get started."
       }
-    ]
+    },
+    {
+      "type": "course-creation-form",
+      "order": 2,
+      "props": {}
+    }
+  ]
   }
 }
 
