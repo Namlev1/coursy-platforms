@@ -23,7 +23,11 @@ class Colors(
 
     @Column(name = "text_primary_color")
     @Convert(converter = ColorConverter::class)
-    var textPrimary: Color
+    var textPrimary: Color,
+
+    @Column(name = "text_secondary_color")
+    @Convert(converter = ColorConverter::class)
+    var textSecondary: Color
 )
 
 @Converter

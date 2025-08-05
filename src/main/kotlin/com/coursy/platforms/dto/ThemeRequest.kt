@@ -54,13 +54,15 @@ data class ThemeRequest(
             val tertiary = parseColor(colorMap, "tertiary").bind()
             val background = parseColor(colorMap, "background").bind()
             val textPrimary = parseColor(colorMap, "textPrimary").bind()
+            val textSecondary = parseColor(colorMap, "textSecondary").bind()
 
             Colors(
                 primary = primary,
                 secondary = secondary,
                 tertiary = tertiary,
                 background = background,
-                textPrimary = textPrimary
+                textPrimary = textPrimary,
+                textSecondary = textSecondary
             )
         }
     }

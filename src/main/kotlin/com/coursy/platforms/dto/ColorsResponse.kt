@@ -8,7 +8,8 @@ data class ColorsResponse(
     var secondary: String,
     var tertiary: String,
     var background: String,
-    var textPrimary: String
+    var textPrimary: String,
+    var textSecondary: String
 )
 
 fun Colors.toResponse() = ColorsResponse(
@@ -17,4 +18,5 @@ fun Colors.toResponse() = ColorsResponse(
     this.tertiary.toHex(),
     this.background.toHex(),
     this.textPrimary.toHex(),
+    this.textSecondary.toHex(),
 )
