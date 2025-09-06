@@ -20,21 +20,19 @@ auth:bearer {
 
 body:json {
   {
-    "title": "Coursy - Course creation",
-    "type": "CourseCreation",
+    "title": "Coursy - Login",
+    "type": "Login",
     "sections": [
     {
-      "type": "page-header",
+      "type": "login-form-centered",
       "order": 1,
       "props": {
-        "title": "Create a new course",
-        "subtitle": "Fill in the details below to get started."
+        "title": "Welcome back",
+        "logoText": "Coursy",
+        "subtitle": "",
+        "submitText": "Login",
+        "loginLinkHref": "/dashboard"
       }
-    },
-    {
-      "type": "course-creation-form",
-      "order": 2,
-      "props": {}
     }
   ]
   }
