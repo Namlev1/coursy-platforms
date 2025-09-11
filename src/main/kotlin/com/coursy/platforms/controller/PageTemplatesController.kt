@@ -6,7 +6,6 @@ import com.coursy.platforms.model.PageType
 import com.coursy.platforms.service.PageTemplateService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -34,12 +33,11 @@ class PageTemplatesController(
     fun addNewTemplate(
         @PathVariable platformId: UUID,
         @RequestBody dto: PageTemplateRequest,
-        jwt: PreAuthenticatedAuthenticationToken
     ): ResponseEntity<Any> {
         return dto
             .validate()
             .flatMap { validated ->
-                pageTemplateService.saveTemplate(platformId, validated, jwt)
+                pageTemplateService.saveTemplate(platformId, validated)
             }
             .fold(
                 { ResponseEntity.status(HttpStatus.FORBIDDEN).body(it.message()) },

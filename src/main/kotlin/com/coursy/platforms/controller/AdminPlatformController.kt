@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/api/admin/platform")
+@RequestMapping("/api/admin/platforms")
 class AdminPlatformController(
     val service: PlatformService
 ) {

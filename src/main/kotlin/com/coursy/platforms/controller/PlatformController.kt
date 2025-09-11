@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/api/user/platform")
-class UserPlatformController(val service: PlatformService) {
+@RequestMapping("/api/platforms")
+class PlatformController(val service: PlatformService) {
 
     @GetMapping
     fun getAllPlatforms(jwt: PreAuthenticatedAuthenticationToken): List<PlatformResponse> {

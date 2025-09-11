@@ -31,13 +31,14 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
                 response.writer.write(failure.message())
                 return
             }
-            val roles = jwt.getClaim("roles")?.asList(String::class.java) ?: emptyList()
-            val authorities = roles.map { SimpleGrantedAuthority("ROLE_$it") }
+
+            val roleString = jwt.getClaim("role")?.asString()
+            val authority = SimpleGrantedAuthority(roleString)
 
             val authentication = PreAuthenticatedAuthenticationToken(
                 email,
                 jwt,
-                authorities
+                listOf(authority)
             )
             authentication.isAuthenticated = true
             SecurityContextHolder.getContext().authentication = authentication
