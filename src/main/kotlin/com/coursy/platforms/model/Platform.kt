@@ -4,6 +4,7 @@ import com.coursy.platforms.model.footer.DefaultFooter
 import com.coursy.platforms.model.footer.FooterItem
 import com.coursy.platforms.model.navbar.DefaultNavbar
 import com.coursy.platforms.model.navbar.NavbarConfig
+import jakarta.annotation.PostConstruct
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
@@ -24,9 +25,16 @@ class Platform(
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var navbarConfig: NavbarConfig = DefaultNavbar.create(),
     @OneToMany(mappedBy = "platform", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var footerItems: MutableList<FooterItem> = DefaultFooter.create()
+    var footerItems: MutableList<FooterItem> = mutableListOf()
     
 ) {
+    @PostConstruct
+    fun initializeDefaults() {
+        if (footerItems.isEmpty()) {
+            footerItems.addAll(DefaultFooter.create(this))
+        }
+    } 
+    
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
