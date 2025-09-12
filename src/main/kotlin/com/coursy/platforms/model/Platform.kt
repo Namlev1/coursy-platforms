@@ -1,5 +1,7 @@
 package com.coursy.platforms.model
 
+import com.coursy.platforms.model.navbar.DefaultNavbar
+import com.coursy.platforms.model.navbar.NavbarConfig
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
@@ -16,7 +18,9 @@ class Platform(
     var templates: MutableList<PageTemplate> = mutableListOf(),
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "theme_id", referencedColumnName = "id")
-    var theme: Theme
+    var theme: Theme,
+    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var navbarConfig: NavbarConfig = DefaultNavbar.create()
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
