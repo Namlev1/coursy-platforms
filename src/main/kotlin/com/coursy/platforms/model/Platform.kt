@@ -1,5 +1,7 @@
 package com.coursy.platforms.model
 
+import com.coursy.platforms.model.footer.DefaultFooter
+import com.coursy.platforms.model.footer.FooterItem
 import com.coursy.platforms.model.navbar.DefaultNavbar
 import com.coursy.platforms.model.navbar.NavbarConfig
 import jakarta.persistence.*
@@ -20,7 +22,10 @@ class Platform(
     @JoinColumn(name = "theme_id", referencedColumnName = "id")
     var theme: Theme,
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-    var navbarConfig: NavbarConfig = DefaultNavbar.create()
+    var navbarConfig: NavbarConfig = DefaultNavbar.create(),
+    @OneToMany(mappedBy = "platform", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    var footerItems: MutableList<FooterItem> = DefaultFooter.create()
+    
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -2,8 +2,7 @@ package com.coursy.platforms.controller
 
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.PlatformFailure
-import com.coursy.platforms.model.navbar.NavbarConfig
-import com.coursy.platforms.service.ConfigService
+import com.coursy.platforms.service.NavbarFooterService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,21 +14,27 @@ import java.util.*
 // TODO adjust security
 @RestController
 @RequestMapping("/api/platforms/{platformId}")
-class ConfigController(
-    private val configService: ConfigService
+class NavbarFooterController(
+    private val navbarFooterService: NavbarFooterService
 ) {
 
     @GetMapping("/navbar")
     fun getNavbarConfig(@PathVariable platformId: UUID): ResponseEntity<Any> =
-        configService
+        navbarFooterService
             .getNavbarConfig(platformId)
             .fold(
                 { failure: PlatformFailure -> handleFailure(failure) },
-                { navbarConfig: NavbarConfig -> ResponseEntity.ok(navbarConfig) }
+                { navbarConfig -> ResponseEntity.ok(navbarConfig) }
             )
 
     @GetMapping("/footer")
-    fun getFooterConfig() = ""
+    fun getFooterList(@PathVariable platformId: UUID) =
+        navbarFooterService
+            .getFooterConfig(platformId)
+            .fold(
+                { failure: PlatformFailure -> handleFailure(failure) },
+                { footerList -> ResponseEntity.ok(footerList) }
+            )
 
     private fun handleFailure(failure: Failure): ResponseEntity<Any> =
         when (failure) {
