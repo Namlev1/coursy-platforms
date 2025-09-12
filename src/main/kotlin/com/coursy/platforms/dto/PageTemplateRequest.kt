@@ -8,21 +8,25 @@ import com.coursy.platforms.failure.PageTemplateFailure
 import com.coursy.platforms.model.PageTemplate
 import com.coursy.platforms.model.PageType
 import com.coursy.platforms.types.PageTitle
+import com.fasterxml.jackson.databind.JsonNode
 
 data class PageTemplateRequest(
     val title: String,
     val type: String,
     val sections: List<PageSectionRequest>,
+    val props: JsonNode?,
 ) : SelfValidating<Failure, PageTemplateRequest.Validated> {
     data class Validated(
         val title: PageTitle,
         val type: PageType,
         val sections: List<PageSectionRequest.Validated>,
+        val props: JsonNode?,
     ) {
         fun toModel() = PageTemplate(
             title = title.value,
             sections = sections.map { it.toModel() }.toMutableList(),
-            type = type
+            type = type,
+            props = props
         )
     }
 
@@ -37,7 +41,8 @@ data class PageTemplateRequest(
             Validated(
                 title = validTitle,
                 sections = validSections,
-                type = validType
+                type = validType,
+                props = props
             )
         }
     }

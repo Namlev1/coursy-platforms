@@ -1,7 +1,10 @@
 package com.coursy.platforms.model
 
+import com.fasterxml.jackson.databind.JsonNode
 import jakarta.persistence.*
 import org.hibernate.Hibernate
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.util.*
 
 @Entity
@@ -11,10 +14,11 @@ class PageTemplate(
     var title: String,
     @Enumerated(EnumType.STRING)
     var type: PageType,
-
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "page_template_id")
     var sections: MutableList<PageSection> = mutableListOf(),
+    @JdbcTypeCode(SqlTypes.JSON)
+    var props: JsonNode?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
