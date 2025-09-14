@@ -6,27 +6,31 @@ import arrow.core.left
 import arrow.core.raise.either
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ThemeFailure
+import com.coursy.platforms.model.PlatformConfig
 import com.coursy.platforms.model.customization.CourseListLayout
 import com.coursy.platforms.model.customization.VideoPlayerType
 import com.coursy.platforms.model.theme.Colors
 import com.coursy.platforms.model.theme.Theme
 import java.awt.Color
 
-data class ThemeRequest(
+data class ConfigRequest(
     val courseListLayout: String,
     val videoPlayerType: String,
     val colors: Map<String, String>
-) : SelfValidating<Failure, ThemeRequest.Validated> {
+) : SelfValidating<Failure, ConfigRequest.Validated> {
     data class Validated(
         val courseListLayout: CourseListLayout,
         val videoPlayerType: VideoPlayerType,
         val colors: Colors,
     ) {
-        fun toModel() = Theme(
-            courseListLayout = courseListLayout,
-            videoPlayerType = videoPlayerType,
-            colors = colors
-        )
+        fun toModel(): PlatformConfig {
+            val theme = Theme(colors = colors)
+            return PlatformConfig(
+                theme = theme,
+                courseListLayout = courseListLayout,
+                videoPlayerType = videoPlayerType
+            )
+        }
     }
 
     override fun validate(): Either<Failure, Validated> {

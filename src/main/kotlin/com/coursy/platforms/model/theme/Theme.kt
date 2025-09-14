@@ -1,9 +1,10 @@
 package com.coursy.platforms.model.theme
 
-import com.coursy.platforms.model.Platform
-import com.coursy.platforms.model.customization.CourseListLayout
-import com.coursy.platforms.model.customization.VideoPlayerType
-import jakarta.persistence.*
+import com.coursy.platforms.model.PlatformConfig
+import jakarta.persistence.Embedded
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.OneToOne
 import org.hibernate.Hibernate
 import java.util.*
 
@@ -11,14 +12,10 @@ import java.util.*
 class Theme(
     @Id
     var id: UUID = UUID.randomUUID(),
-    @Enumerated(EnumType.STRING)
-    var courseListLayout: CourseListLayout,
-    @Enumerated(EnumType.STRING)
-    var videoPlayerType: VideoPlayerType,
     @Embedded
     var colors: Colors,
     @OneToOne(mappedBy = "theme")
-    var platform: Platform? = null
+    var config: PlatformConfig? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

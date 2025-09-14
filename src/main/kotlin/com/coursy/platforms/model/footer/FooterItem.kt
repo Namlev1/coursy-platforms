@@ -1,6 +1,6 @@
 package com.coursy.platforms.model.footer
 
-import com.coursy.platforms.model.Platform
+import com.coursy.platforms.model.PlatformConfig
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
@@ -14,8 +14,8 @@ class FooterItem(
     @Column(name = "sort_order")
     var order: Int,
     @ManyToOne
-    @JoinColumn(name = "platform_id")
-    var platform: Platform
+    @JoinColumn(name = "platform_config_id")
+    var config: PlatformConfig
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -11,18 +11,18 @@ import com.coursy.platforms.types.Name
 data class PlatformRequest(
     val name: String,
     val description: String,
-    val theme: ThemeRequest
+    val config: ConfigRequest
 ) : SelfValidating<Failure, PlatformRequest.Validated> {
     data class Validated(
         val name: Name,
         val description: Description,
-        val theme: ThemeRequest.Validated
+        val config: ConfigRequest.Validated
     ) {
         fun toModel(userEmail: Email) = Platform(
             userEmail = userEmail.value,
             name = this.name.value,
             description = this.description.value,
-            theme = theme.toModel()
+            config = config.toModel()
         )
     }
 
@@ -30,12 +30,12 @@ data class PlatformRequest(
         return either {
             val validName = Name.create(name).bind()
             val validDescription = Description.create(description).bind()
-            val validTheme = theme.validate().bind()
+            val validTheme = this@PlatformRequest.config.validate().bind()
 
             Validated(
                 name = validName,
                 description = validDescription,
-                theme = validTheme
+                config = validTheme
             )
         }
     }

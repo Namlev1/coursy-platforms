@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface FooterRepository : JpaRepository<FooterItem, UUID> {
-    fun findAllByPlatform_Id(platformId: UUID): List<FooterItem>
+//    fun findAllByPlatform_Id(platformId: UUID): List<FooterItem>
 }

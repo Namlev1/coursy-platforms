@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import java.util.*
 
 interface ThemeRepository : JpaRepository<Theme, UUID>, JpaSpecificationExecutor<Theme> {
-    fun findByPlatformId(platformId: UUID): Theme?
+//    fun findByPlatformId(platformId: UUID): Theme?
 }
