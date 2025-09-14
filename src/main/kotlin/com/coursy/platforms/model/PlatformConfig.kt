@@ -27,6 +27,8 @@ class PlatformConfig(
     var courseListLayout: CourseListLayout,
     @Enumerated(EnumType.STRING)
     var videoPlayerType: VideoPlayerType,
+    @OneToOne
+    var platform: Platform?
 ) {
 
     @PostConstruct

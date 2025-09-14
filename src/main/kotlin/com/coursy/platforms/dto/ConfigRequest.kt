@@ -6,6 +6,7 @@ import arrow.core.left
 import arrow.core.raise.either
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ThemeFailure
+import com.coursy.platforms.model.Platform
 import com.coursy.platforms.model.PlatformConfig
 import com.coursy.platforms.model.customization.CourseListLayout
 import com.coursy.platforms.model.customization.VideoPlayerType
@@ -23,12 +24,13 @@ data class ConfigRequest(
         val videoPlayerType: VideoPlayerType,
         val colors: Colors,
     ) {
-        fun toModel(): PlatformConfig {
+        fun toModel(platform: Platform): PlatformConfig {
             val theme = Theme(colors = colors)
             return PlatformConfig(
                 theme = theme,
                 courseListLayout = courseListLayout,
-                videoPlayerType = videoPlayerType
+                videoPlayerType = videoPlayerType,
+                platform = platform
             )
         }
     }

@@ -18,12 +18,18 @@ data class PlatformRequest(
         val description: Description,
         val config: ConfigRequest.Validated
     ) {
-        fun toModel(userEmail: Email) = Platform(
-            userEmail = userEmail.value,
-            name = this.name.value,
-            description = this.description.value,
-            config = config.toModel()
-        )
+        fun toModel(userEmail: Email): Platform {
+            val platform = Platform(
+                userEmail = userEmail.value,
+                name = this.name.value,
+                description = this.description.value,
+                config = null
+            )
+            val config = config.toModel(platform)
+            platform.config = config
+
+            return platform
+        }  
     }
 
     override fun validate(): Either<Failure, Validated> {

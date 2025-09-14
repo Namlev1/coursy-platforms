@@ -16,7 +16,7 @@ class Platform(
     @JoinColumn(name = "platform_id")
     var templates: MutableList<PageTemplate> = mutableListOf(),
     @OneToOne
-    var config: PlatformConfig
+    var config: PlatformConfig?
     
 ) {
     
