@@ -5,7 +5,9 @@ import arrow.core.Either.Companion.catch
 import arrow.core.left
 import arrow.core.raise.either
 import com.coursy.platforms.dto.footer.FooterItemDto
+import com.coursy.platforms.dto.footer.toResponse
 import com.coursy.platforms.dto.navbar.NavbarConfigDto
+import com.coursy.platforms.dto.navbar.toResponse
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ThemeFailure
 import com.coursy.platforms.model.Platform
@@ -87,4 +89,21 @@ data class ConfigDto(
         return catch { Color.decode(colorString) }
             .mapLeft { ThemeFailure.InvalidColor(key, colorString) }
     }
+}
+
+fun PlatformConfig.toResponse(): ConfigDto {
+    return ConfigDto(
+        courseListLayout = this.courseListLayout.name,
+        videoPlayerType = this.videoPlayerType.name,
+        colors = mapOf(
+            "primary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.primary.rgb),
+            "secondary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.secondary.rgb),
+            "tertiary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.tertiary.rgb),
+            "background" to String.format("#%06X", 0xFFFFFF and this.theme.colors.background.rgb),
+            "textPrimary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.textPrimary.rgb),
+            "textSecondary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.textSecondary.rgb),
+        ),
+        navbarConfig = this.navbarConfig.toResponse(),
+        footerItems = this.footerItems.map { it.toResponse() }
+    )
 }

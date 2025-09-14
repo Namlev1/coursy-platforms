@@ -26,6 +26,7 @@ class ConfigService(
             .right()
     }
 
+    // TODO authorization
     fun updateConfig(platformId: UUID, configDto: ConfigDto.Validated): Either<PlatformFailure, Unit> {
         val existingConfig = configRepository.getWithPlatformByPlatformId(platformId)
             ?: return PlatformFailure.NotFound(platformId).left()
