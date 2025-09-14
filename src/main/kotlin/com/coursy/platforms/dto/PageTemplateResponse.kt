@@ -1,7 +1,7 @@
 package com.coursy.platforms.dto
 
-import com.coursy.platforms.model.PageTemplate
-import com.coursy.platforms.model.PageType
+import com.coursy.platforms.model.page.PageTemplate
+import com.coursy.platforms.model.page.PageType
 import com.fasterxml.jackson.databind.JsonNode
 import java.util.*
 

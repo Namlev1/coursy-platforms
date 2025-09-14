@@ -1,6 +1,6 @@
 package com.coursy.platforms.dto
 
-import com.coursy.platforms.model.PageSection
+import com.coursy.platforms.model.page.PageSection
 import com.fasterxml.jackson.databind.JsonNode
 import java.util.*
 

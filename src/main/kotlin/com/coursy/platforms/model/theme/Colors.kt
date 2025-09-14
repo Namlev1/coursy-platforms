@@ -1,4 +1,4 @@
-package com.coursy.platforms.model
+package com.coursy.platforms.model.theme
 
 import jakarta.persistence.*
 import java.awt.Color

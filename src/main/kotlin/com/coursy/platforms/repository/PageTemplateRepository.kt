@@ -1,6 +1,6 @@
 package com.coursy.platforms.repository
 
-import com.coursy.platforms.model.PageTemplate
+import com.coursy.platforms.model.page.PageTemplate
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 

@@ -4,7 +4,7 @@ import arrow.core.Either
 import arrow.core.right
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ValidationFailure
-import com.coursy.platforms.model.PageSection
+import com.coursy.platforms.model.page.PageSection
 import com.fasterxml.jackson.databind.JsonNode
 
 data class PageSectionRequest(

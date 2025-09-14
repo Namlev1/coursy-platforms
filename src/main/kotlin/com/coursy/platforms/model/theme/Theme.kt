@@ -1,5 +1,8 @@
-package com.coursy.platforms.model
+package com.coursy.platforms.model.theme
 
+import com.coursy.platforms.model.Platform
+import com.coursy.platforms.model.customization.CourseListLayout
+import com.coursy.platforms.model.customization.VideoPlayerType
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*

@@ -5,8 +5,8 @@ import arrow.core.Either.Companion.catch
 import arrow.core.raise.either
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.PageTemplateFailure
-import com.coursy.platforms.model.PageTemplate
-import com.coursy.platforms.model.PageType
+import com.coursy.platforms.model.page.PageTemplate
+import com.coursy.platforms.model.page.PageType
 import com.coursy.platforms.types.PageTitle
 import com.fasterxml.jackson.databind.JsonNode
 

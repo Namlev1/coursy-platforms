@@ -2,7 +2,7 @@ package com.coursy.platforms.controller
 
 import arrow.core.flatMap
 import com.coursy.platforms.dto.PageTemplateRequest
-import com.coursy.platforms.model.PageType
+import com.coursy.platforms.model.page.PageType
 import com.coursy.platforms.service.PageTemplateService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

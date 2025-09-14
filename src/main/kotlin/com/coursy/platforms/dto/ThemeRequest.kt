@@ -6,10 +6,10 @@ import arrow.core.left
 import arrow.core.raise.either
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ThemeFailure
-import com.coursy.platforms.model.Colors
-import com.coursy.platforms.model.CourseListLayout
-import com.coursy.platforms.model.Theme
-import com.coursy.platforms.model.VideoPlayerType
+import com.coursy.platforms.model.customization.CourseListLayout
+import com.coursy.platforms.model.customization.VideoPlayerType
+import com.coursy.platforms.model.theme.Colors
+import com.coursy.platforms.model.theme.Theme
 import java.awt.Color
 
 data class ThemeRequest(

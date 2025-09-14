@@ -9,7 +9,7 @@ import com.coursy.platforms.dto.toResponse
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.PageTemplateFailure
 import com.coursy.platforms.failure.PlatformFailure
-import com.coursy.platforms.model.PageType
+import com.coursy.platforms.model.page.PageType
 import com.coursy.platforms.repository.PageTemplateRepository
 import com.coursy.platforms.repository.PlatformRepository
 import org.springframework.data.repository.findByIdOrNull

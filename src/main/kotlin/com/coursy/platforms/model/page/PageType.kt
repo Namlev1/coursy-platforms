@@ -1,4 +1,4 @@
-package com.coursy.platforms.model
+package com.coursy.platforms.model.page
 
 enum class PageType {
     Home,

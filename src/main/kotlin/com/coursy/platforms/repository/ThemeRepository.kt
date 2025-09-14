@@ -1,6 +1,6 @@
 package com.coursy.platforms.repository
 
-import com.coursy.platforms.model.Theme
+import com.coursy.platforms.model.theme.Theme
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import java.util.*

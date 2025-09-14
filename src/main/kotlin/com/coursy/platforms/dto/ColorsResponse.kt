@@ -1,7 +1,7 @@
 package com.coursy.platforms.dto
 
-import com.coursy.platforms.model.Colors
-import com.coursy.platforms.model.toHex
+import com.coursy.platforms.model.theme.Colors
+import com.coursy.platforms.model.theme.toHex
 
 data class ColorsResponse(
     var primary: String,

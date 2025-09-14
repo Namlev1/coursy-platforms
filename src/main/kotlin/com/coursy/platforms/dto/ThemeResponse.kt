@@ -1,8 +1,8 @@
 package com.coursy.platforms.dto
 
-import com.coursy.platforms.model.CourseListLayout
-import com.coursy.platforms.model.Theme
-import com.coursy.platforms.model.VideoPlayerType
+import com.coursy.platforms.model.customization.CourseListLayout
+import com.coursy.platforms.model.customization.VideoPlayerType
+import com.coursy.platforms.model.theme.Theme
 
 data class ThemeResponse(
     val colors: ColorsResponse,

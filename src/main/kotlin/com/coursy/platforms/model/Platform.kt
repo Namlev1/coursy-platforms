@@ -4,6 +4,8 @@ import com.coursy.platforms.model.footer.DefaultFooter
 import com.coursy.platforms.model.footer.FooterItem
 import com.coursy.platforms.model.navbar.DefaultNavbar
 import com.coursy.platforms.model.navbar.NavbarConfig
+import com.coursy.platforms.model.page.PageTemplate
+import com.coursy.platforms.model.theme.Theme
 import jakarta.annotation.PostConstruct
 import jakarta.persistence.*
 import org.hibernate.Hibernate
