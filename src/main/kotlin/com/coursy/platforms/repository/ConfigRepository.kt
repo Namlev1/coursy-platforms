@@ -1,7 +1,11 @@
 package com.coursy.platforms.repository
 
 import com.coursy.platforms.model.PlatformConfig
+import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-interface ConfigRepository : JpaRepository<PlatformConfig, UUID>
+interface ConfigRepository : JpaRepository<PlatformConfig, UUID> {
+    @EntityGraph(attributePaths = ["platform"])
+    fun getWithPlatformByPlatformId(platformId: UUID): PlatformConfig?
+}

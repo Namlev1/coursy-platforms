@@ -11,12 +11,12 @@ import com.coursy.platforms.types.Name
 data class PlatformRequest(
     val name: String,
     val description: String,
-    val config: ConfigRequest
+    val config: ConfigDto
 ) : SelfValidating<Failure, PlatformRequest.Validated> {
     data class Validated(
         val name: Name,
         val description: Description,
-        val config: ConfigRequest.Validated
+        val config: ConfigDto.Validated
     ) {
         fun toModel(userEmail: Email): Platform {
             val platform = Platform(

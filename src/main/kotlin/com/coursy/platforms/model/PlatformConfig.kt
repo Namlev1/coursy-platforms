@@ -21,7 +21,7 @@ class PlatformConfig(
     var theme: Theme,
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var navbarConfig: NavbarConfig = DefaultNavbar.create(),
-    @OneToMany(mappedBy = "config", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, orphanRemoval = true)
     var footerItems: MutableList<FooterItem> = mutableListOf(),
     @Enumerated(EnumType.STRING)
     var courseListLayout: CourseListLayout,

@@ -2,14 +2,14 @@ package com.coursy.platforms.dto.navbar
 
 import com.coursy.platforms.model.navbar.NavbarConfig
 
-data class NavbarConfigResponse(
+data class NavbarConfigDto(
     val logoUrl: String?,
     val logoText: String?,
     val isLogoVisible: Boolean,
-    val navItems: List<NavItemResponse>
+    val navItems: List<NavItemDto>
 )
 
-fun NavbarConfig.toResponse() = NavbarConfigResponse(
+fun NavbarConfig.toResponse() = NavbarConfigDto(
     logoUrl = logoUrl,
     logoText = logoText,
     isLogoVisible = isLogoVisible,

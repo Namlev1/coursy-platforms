@@ -1,9 +1,6 @@
 package com.coursy.platforms.model.navbar
 
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.OneToMany
+import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
 
@@ -14,7 +11,7 @@ class NavbarConfig(
     var logoUrl: String?,
     var logoText: String?,
     var isLogoVisible: Boolean,
-    @OneToMany
+    @OneToMany(cascade = [(CascadeType.ALL)], fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "navbar_id")
     var navItems: MutableList<NavItem>
 ) {

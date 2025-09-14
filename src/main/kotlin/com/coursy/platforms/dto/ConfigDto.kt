@@ -4,6 +4,8 @@ import arrow.core.Either
 import arrow.core.Either.Companion.catch
 import arrow.core.left
 import arrow.core.raise.either
+import com.coursy.platforms.dto.footer.FooterItemDto
+import com.coursy.platforms.dto.navbar.NavbarConfigDto
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.ThemeFailure
 import com.coursy.platforms.model.Platform
@@ -14,17 +16,21 @@ import com.coursy.platforms.model.theme.Colors
 import com.coursy.platforms.model.theme.Theme
 import java.awt.Color
 
-data class ConfigRequest(
+data class ConfigDto(
     val courseListLayout: String,
     val videoPlayerType: String,
-    val colors: Map<String, String>
-) : SelfValidating<Failure, ConfigRequest.Validated> {
+    val colors: Map<String, String>,
+    val navbarConfig: NavbarConfigDto,
+    val footerItems: List<FooterItemDto>,
+) : SelfValidating<Failure, ConfigDto.Validated> {
     data class Validated(
         val courseListLayout: CourseListLayout,
         val videoPlayerType: VideoPlayerType,
         val colors: Colors,
+        val navbarConfig: NavbarConfigDto,
+        val footerItems: List<FooterItemDto>,
     ) {
-        fun toModel(platform: Platform): PlatformConfig {
+        fun toModel(platform: Platform?): PlatformConfig {
             val theme = Theme(colors = colors)
             return PlatformConfig(
                 theme = theme,
@@ -48,7 +54,9 @@ data class ConfigRequest(
             Validated(
                 courseListLayout = validCourseListLayout,
                 videoPlayerType = validVideoPlayerType,
-                colors = validColors
+                colors = validColors,
+                navbarConfig = navbarConfig,
+                footerItems = footerItems
             )
         }
     }

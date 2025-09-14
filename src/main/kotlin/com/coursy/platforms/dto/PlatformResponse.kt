@@ -7,7 +7,7 @@ data class PlatformResponse(
     val id: UUID,
     val name: String,
     val description: String,
-    val config: ConfigResponse
+    val config: ConfigDto
 )
 
 fun Platform.toResponse(): PlatformResponse =
