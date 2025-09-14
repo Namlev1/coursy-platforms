@@ -7,6 +7,7 @@ import com.coursy.platforms.model.footer.FooterItem
 import com.coursy.platforms.model.navbar.DefaultNavbar
 import com.coursy.platforms.model.navbar.NavbarConfig
 import com.coursy.platforms.model.theme.Theme
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
@@ -28,6 +29,7 @@ class PlatformConfig(
     @Enumerated(EnumType.STRING)
     var videoPlayerType: VideoPlayerType,
     @OneToOne
+    @JsonIgnore
     var platform: Platform?
 ) {
 

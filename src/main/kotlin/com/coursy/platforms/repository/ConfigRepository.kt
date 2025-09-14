@@ -8,4 +8,5 @@ import java.util.*
 interface ConfigRepository : JpaRepository<PlatformConfig, UUID> {
     @EntityGraph(attributePaths = ["platform"])
     fun getWithPlatformByPlatformId(platformId: UUID): PlatformConfig?
+    fun findByPlatformId(platformId: UUID): Optional<PlatformConfig>
 }

@@ -21,7 +21,7 @@ class ConfigService(
     private val configRepository: ConfigRepository,
 ) {
     fun getByPlatformId(platformId: UUID): Either<PlatformFailure.NotFound, PlatformConfig> {
-        return configRepository.findById(platformId)
+        return configRepository.findByPlatformId(platformId)
             .getOrElse { return PlatformFailure.NotFound(platformId).left() }
             .right()
     }
