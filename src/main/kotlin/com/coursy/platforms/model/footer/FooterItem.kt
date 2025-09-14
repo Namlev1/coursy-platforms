@@ -1,10 +1,7 @@
 package com.coursy.platforms.model.footer
 
 import com.coursy.platforms.model.Platform
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import org.hibernate.Hibernate
 import java.util.*
 
@@ -14,6 +11,7 @@ class FooterItem(
     var id: UUID = UUID.randomUUID(),
     var href: String,
     var label: String,
+    @Column(name = "sort_order")
     var order: Int,
     @ManyToOne
     @JoinColumn(name = "platform_id")
