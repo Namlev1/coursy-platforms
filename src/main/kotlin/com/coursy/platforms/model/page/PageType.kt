@@ -4,6 +4,7 @@ enum class PageType {
     Home,
     Signup,
     Dashboard,
+    Courses,
     CourseCreation,
     Login
 }

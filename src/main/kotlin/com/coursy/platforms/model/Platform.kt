@@ -15,7 +15,8 @@ class Platform(
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "platform_id")
     var templates: MutableList<PageTemplate> = mutableListOf(),
-    @OneToOne
+    @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @JoinColumn(name = "config_id")
     var config: PlatformConfig?
     
 ) {

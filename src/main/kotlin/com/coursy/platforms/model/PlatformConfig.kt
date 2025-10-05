@@ -28,7 +28,7 @@ class PlatformConfig(
     var courseListLayout: CourseListLayout,
     @Enumerated(EnumType.STRING)
     var videoPlayerType: VideoPlayerType,
-    @OneToOne
+    @OneToOne(mappedBy = "config")
     @JsonIgnore
     var platform: Platform?
 ) {

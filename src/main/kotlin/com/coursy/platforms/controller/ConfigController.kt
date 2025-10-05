@@ -2,6 +2,7 @@ package com.coursy.platforms.controller
 
 import arrow.core.getOrElse
 import com.coursy.platforms.dto.ConfigDto
+import com.coursy.platforms.dto.toResponse
 import com.coursy.platforms.failure.Failure
 import com.coursy.platforms.failure.PlatformFailure
 import com.coursy.platforms.service.ConfigService
@@ -21,7 +22,7 @@ class ConfigController(
             .getByPlatformId(platformId)
             .fold(
                 { failure -> handleFailure(failure) },
-                { ResponseEntity.status(HttpStatus.OK).body(it) }
+                { ResponseEntity.status(HttpStatus.OK).body(it.toResponse()) }
             )
     }
 
