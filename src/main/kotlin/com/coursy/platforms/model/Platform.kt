@@ -17,8 +17,8 @@ class Platform(
     var templates: MutableList<PageTemplate> = mutableListOf(),
     @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     @JoinColumn(name = "config_id")
-    var config: PlatformConfig?
-    
+    var config: PlatformConfig?,
+    var subdomain: String
 ) {
     
     override fun equals(other: Any?): Boolean {

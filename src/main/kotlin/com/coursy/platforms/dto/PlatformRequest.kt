@@ -7,29 +7,33 @@ import com.coursy.platforms.model.Platform
 import com.coursy.platforms.types.Description
 import com.coursy.platforms.types.Email
 import com.coursy.platforms.types.Name
+import com.coursy.platforms.types.Subdomain
 
 data class PlatformRequest(
     val name: String,
     val description: String,
-    val config: ConfigDto
+    val config: ConfigDto,
+    val subdomain: String
 ) : SelfValidating<Failure, PlatformRequest.Validated> {
     data class Validated(
         val name: Name,
         val description: Description,
-        val config: ConfigDto.Validated
+        val config: ConfigDto.Validated,
+        val subdomain: Subdomain
     ) {
         fun toModel(userEmail: Email): Platform {
             val platform = Platform(
                 userEmail = userEmail.value,
                 name = this.name.value,
                 description = this.description.value,
-                config = null
+                config = null,
+                subdomain = this.subdomain.value
             )
             val config = config.toModel(platform)
             platform.config = config
 
             return platform
-        }  
+        }
     }
 
     override fun validate(): Either<Failure, Validated> {
@@ -37,11 +41,13 @@ data class PlatformRequest(
             val validName = Name.create(name).bind()
             val validDescription = Description.create(description).bind()
             val validTheme = this@PlatformRequest.config.validate().bind()
+            val validSubdomain = Subdomain.create(subdomain).bind()
 
             Validated(
                 name = validName,
                 description = validDescription,
-                config = validTheme
+                config = validTheme,
+                subdomain = validSubdomain
             )
         }
     }
