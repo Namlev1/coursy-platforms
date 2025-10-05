@@ -8,7 +8,7 @@ data class PlatformResponse(
     val name: String,
     val description: String,
     val config: ConfigDto?,
-    val url: String
+    val subdomain: String
 )
 
 fun Platform.toResponse(): PlatformResponse =
@@ -17,5 +17,5 @@ fun Platform.toResponse(): PlatformResponse =
         name = this.name,
         description = this.description,
         config = this.config?.toResponse(),
-        url = this.subdomain
+        subdomain = this.subdomain
     )

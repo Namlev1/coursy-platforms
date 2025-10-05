@@ -8,8 +8,8 @@ import com.coursy.platforms.failure.ValidationFailure
 @JvmInline
 value class Description private constructor(val value: String) {
     companion object {
-        private const val MIN_LENGTH = 2
-        private const val MAX_LENGTH = 50
+        private const val MIN_LENGTH = 1
+        private const val MAX_LENGTH = 4000
 
         fun create(value: String): Either<ValidationFailure, Description> = when {
             value.isEmpty() -> ValidationFailure.Empty.left()
