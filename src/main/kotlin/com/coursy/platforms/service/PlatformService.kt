@@ -26,7 +26,6 @@ class PlatformService(val repo: PlatformRepository) {
         email: Email
     ) = repo
         .save(dto.toModel(email))
-        .right()
 
     fun deletePlatform(id: UUID) = repo.deleteById(id)
 

@@ -24,7 +24,8 @@ class SecurityConfig(
                     .requestMatchers(
                         HttpMethod.GET,
                         "/api/platforms/{platformId}/templates/{type}",
-                        "/api/platforms/{platformId}/config"
+                        "/api/platforms/{platformId}/config/**",
+                        "/api/platforms/{platformId}"
                     )
                     .permitAll()
 

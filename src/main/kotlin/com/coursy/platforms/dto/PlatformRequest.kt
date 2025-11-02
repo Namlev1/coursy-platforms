@@ -13,13 +13,13 @@ data class PlatformRequest(
     val name: String,
     val description: String,
     val config: ConfigDto,
-    val subdomain: String
+    val subdomain: String,
 ) : SelfValidating<Failure, PlatformRequest.Validated> {
     data class Validated(
         val name: Name,
         val description: Description,
         val config: ConfigDto.Validated,
-        val subdomain: Subdomain
+        val subdomain: Subdomain,
     ) {
         fun toModel(userEmail: Email): Platform {
             val platform = Platform(
@@ -47,7 +47,7 @@ data class PlatformRequest(
                 name = validName,
                 description = validDescription,
                 config = validTheme,
-                subdomain = validSubdomain
+                subdomain = validSubdomain,
             )
         }
     }

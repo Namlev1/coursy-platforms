@@ -14,3 +14,9 @@ server:
 auth:
   service:
     url: http://localhost:9000
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:11000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket-name: ${MINIO_BUCKET_NAME:platforms}

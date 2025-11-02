@@ -16,6 +16,9 @@ import com.coursy.platforms.model.customization.CourseListLayout
 import com.coursy.platforms.model.customization.VideoPlayerType
 import com.coursy.platforms.model.theme.Colors
 import com.coursy.platforms.model.theme.Theme
+import com.coursy.platforms.types.CtaText
+import com.coursy.platforms.types.HeroSubtitle
+import com.coursy.platforms.types.HeroTitle
 import java.awt.Color
 
 data class ConfigDto(
@@ -24,6 +27,9 @@ data class ConfigDto(
     val colors: Map<String, String>,
     val navbarConfig: NavbarConfigDto,
     val footerItems: List<FooterItemDto>,
+    val heroTitle: String,
+    val heroSubtitle: String,
+    val ctaText: String,
 ) : SelfValidating<Failure, ConfigDto.Validated> {
     data class Validated(
         val courseListLayout: CourseListLayout,
@@ -31,6 +37,9 @@ data class ConfigDto(
         val colors: Colors,
         val navbarConfig: NavbarConfigDto,
         val footerItems: List<FooterItemDto>,
+        val heroTitle: HeroTitle,
+        val heroSubtitle: HeroSubtitle,
+        val ctaText: CtaText,
     ) {
         fun toModel(platform: Platform?): PlatformConfig {
             val theme = Theme(colors = colors)
@@ -38,7 +47,10 @@ data class ConfigDto(
                 theme = theme,
                 courseListLayout = courseListLayout,
                 videoPlayerType = videoPlayerType,
-                platform = platform
+                platform = platform,
+                heroTitle = heroTitle,
+                heroSubtitle = heroSubtitle,
+                ctaText = ctaText,
             )
         }
     }
@@ -53,12 +65,19 @@ data class ConfigDto(
                 .bind()
             val validColors = validateColors(colors).bind()
 
+            val validHeroTitle = HeroTitle.create(heroTitle).bind()
+            val validHeroSubtitle = HeroSubtitle.create(heroSubtitle).bind()
+            val validCtaText = CtaText.create(heroTitle).bind()
+
             Validated(
                 courseListLayout = validCourseListLayout,
                 videoPlayerType = validVideoPlayerType,
                 colors = validColors,
                 navbarConfig = navbarConfig,
-                footerItems = footerItems
+                footerItems = footerItems,
+                heroTitle = validHeroTitle,
+                heroSubtitle = validHeroSubtitle,
+                ctaText = validCtaText,
             )
         }
     }
@@ -104,6 +123,9 @@ fun PlatformConfig.toResponse(): ConfigDto {
             "textSecondary" to String.format("#%06X", 0xFFFFFF and this.theme.colors.textSecondary.rgb),
         ),
         navbarConfig = this.navbarConfig.toResponse(),
-        footerItems = this.footerItems.map { it.toResponse() }
+        footerItems = this.footerItems.map { it.toResponse() },
+        heroTitle = this.heroTitle.value,
+        heroSubtitle = this.heroSubtitle.value,
+        ctaText = this.ctaText.value,
     )
 }

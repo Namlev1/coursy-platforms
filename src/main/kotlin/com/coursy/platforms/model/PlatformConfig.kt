@@ -7,6 +7,9 @@ import com.coursy.platforms.model.footer.FooterItem
 import com.coursy.platforms.model.navbar.DefaultNavbar
 import com.coursy.platforms.model.navbar.NavbarConfig
 import com.coursy.platforms.model.theme.Theme
+import com.coursy.platforms.types.CtaText
+import com.coursy.platforms.types.HeroSubtitle
+import com.coursy.platforms.types.HeroTitle
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.Hibernate
@@ -28,6 +31,11 @@ class PlatformConfig(
     var courseListLayout: CourseListLayout,
     @Enumerated(EnumType.STRING)
     var videoPlayerType: VideoPlayerType,
+
+    var heroTitle: HeroTitle,
+    var heroSubtitle: HeroSubtitle,
+    var ctaText: CtaText,
+
     @OneToOne(mappedBy = "config")
     @JsonIgnore
     var platform: Platform?
