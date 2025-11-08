@@ -47,11 +47,11 @@ class PlatformController(
         @RequestPart("hero") hero: MultipartFile,
         jwt: PreAuthenticatedAuthenticationToken
     ): ResponseEntity<Any> {
-        val (email, _) = jwt.readToken()
+        val (email, id) = jwt.readToken()
         return platformRequest
             .validate()
             .flatMap { validatedRequest ->
-                service.savePlatform(validatedRequest, email).right()
+                service.savePlatform(validatedRequest, email, id).right()
             }
             .flatMap { platform ->
                 imageService.uploadLogo(logo, platform.id)

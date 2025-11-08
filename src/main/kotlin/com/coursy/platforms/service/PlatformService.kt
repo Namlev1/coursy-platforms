@@ -7,6 +7,7 @@ import com.coursy.platforms.dto.PlatformRequest
 import com.coursy.platforms.dto.PlatformResponse
 import com.coursy.platforms.dto.toResponse
 import com.coursy.platforms.failure.PlatformFailure
+import com.coursy.platforms.internal.UsersClient
 import com.coursy.platforms.model.Platform
 import com.coursy.platforms.repository.PlatformRepository
 import com.coursy.platforms.types.Email
@@ -15,7 +16,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class PlatformService(val repo: PlatformRepository) {
+class PlatformService(
+    val repo: PlatformRepository,
+    val usersClient: UsersClient,
+) {
     fun getAllPlatforms(): List<PlatformResponse> =
         repo
             .findAll()
@@ -23,9 +27,13 @@ class PlatformService(val repo: PlatformRepository) {
 
     fun savePlatform(
         dto: PlatformRequest.Validated,
-        email: Email
-    ) = repo
-        .save(dto.toModel(email))
+        email: Email,
+        userId: UUID
+    ): Platform {
+        val platform = repo.save(dto.toModel(email))
+        usersClient.createOwner(userId, platform.id)
+        return platform
+    }
 
     fun deletePlatform(id: UUID) = repo.deleteById(id)
 

@@ -13,7 +13,10 @@ server:
   port: 8082
 auth:
   service:
-    url: http://localhost:9000
+    url: ${AUTH_SERVICE_URL:http://localhost:8085}
+users:
+  service:
+    url: ${USERS_SERVICE_URL:http://localhost:8081}
 
 minio:
   endpoint: ${MINIO_ENDPOINT:http://localhost:11000}
