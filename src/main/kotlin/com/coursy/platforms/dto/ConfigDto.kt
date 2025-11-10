@@ -67,7 +67,7 @@ data class ConfigDto(
 
             val validHeroTitle = HeroTitle.create(heroTitle).bind()
             val validHeroSubtitle = HeroSubtitle.create(heroSubtitle).bind()
-            val validCtaText = CtaText.create(heroTitle).bind()
+            val validCtaText = CtaText.create(ctaText).bind()
 
             Validated(
                 courseListLayout = validCourseListLayout,
