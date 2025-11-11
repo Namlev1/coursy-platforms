@@ -35,6 +35,12 @@ class PlatformService(
         return platform
     }
 
+    fun getIdByDomain(subdomain: String): Either<PlatformFailure, UUID> {
+        val platform = repo.getBySubdomain(subdomain)
+            ?: return PlatformFailure.NotFoundDomain(subdomain).left()
+        return platform.id.right()
+    }
+
     fun deletePlatform(id: UUID) = repo.deleteById(id)
 
     fun deletePlatform(platformId: UUID, userEmail: Email): Either<PlatformFailure, Unit> {

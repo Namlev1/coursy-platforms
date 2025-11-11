@@ -8,4 +8,5 @@ import java.util.*
 @Repository
 interface PlatformRepository : JpaRepository<Platform, UUID> {
     fun getByUserEmail(email: String): List<Platform>
+    fun getBySubdomain(subdomain: String): Platform?
 }

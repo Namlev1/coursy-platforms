@@ -40,6 +40,15 @@ class PlatformController(
             )
     }
 
+    @GetMapping("/domain/{subdomain}")
+    fun getPlatformById(@PathVariable subdomain: String): ResponseEntity<Any> {
+        return service.getIdByDomain(subdomain)
+            .fold(
+                { handleFailure(it) },
+                { ResponseEntity.status(HttpStatus.OK).body(it) }
+            )
+    }
+
     @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun createPlatform(
         @RequestPart("data") platformRequest: PlatformRequest,

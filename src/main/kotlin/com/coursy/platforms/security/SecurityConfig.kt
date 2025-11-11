@@ -25,7 +25,8 @@ class SecurityConfig(
                         HttpMethod.GET,
                         "/api/platforms/{platformId}/templates/{type}",
                         "/api/platforms/{platformId}/config/**",
-                        "/api/platforms/{platformId}"
+                        "/api/platforms/{platformId}",
+                        "/api/platforms/domain/{subdomain}",
                     )
                     .permitAll()
 
