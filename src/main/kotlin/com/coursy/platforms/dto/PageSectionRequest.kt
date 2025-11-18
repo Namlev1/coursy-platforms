@@ -25,7 +25,7 @@ data class PageSectionRequest(
     }
 
     override fun validate(): Either<ValidationFailure, Validated> {
-        // TODO actually validation
+
         return Validated(
             type = type,
             order = order,

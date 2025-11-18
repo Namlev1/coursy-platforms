@@ -13,7 +13,7 @@ import java.util.*
 class PageSection(
     @Id
     var id: UUID = UUID.randomUUID(),
-    var type: String,  // Just a string identifier
+    var type: String,
     @Column(name = "`order`")
     var order: Int,
     @JdbcTypeCode(SqlTypes.JSON)
